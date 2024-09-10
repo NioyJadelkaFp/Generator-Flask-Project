@@ -109,7 +109,6 @@ async def get_json():
         os.chdir("..")
         os.chdir("js")
         script = os.open("script.js", os.O_CREAT | os.O_WRONLY)
-        os.write(script,'')
         os.chdir("..")
 
         os.close(app_py) 
