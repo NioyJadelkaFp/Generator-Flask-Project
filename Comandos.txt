@@ -1,2 +1,2 @@
 Levantar api
-    - uvicorn server:app --reload
+    uvicorn GFP:app --reload

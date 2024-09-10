@@ -77,9 +77,6 @@ if __name__ == '__main__':
 
                     """
     return datos
-
-
-
 app = FastAPI()
 
 @app.get("/json")
@@ -87,22 +84,37 @@ async def get_json():
     def create():
 
         
-        html = html()
+        html_service = html()
         dato = datos()
-
         os.mkdir("flask-proyects")
         os.chdir("flask-proyects")
-        subprocess.run(['bash', '-c', f'echo "{dato}" > app.py'])
-        os.mkdir("static")
         os.mkdir("templates")
-        os.chdir("templates")
-        subprocess.run(['bash', '-c', f'echo "{html}" > index.html'])
-        subprocess.run(['cd ..']) #cambiar por uno que funciona
+        os.mkdir("static")
         os.chdir("static")
         os.mkdir("css")
-        os.chdir("css")
-        subprocess.run(['bash', '-c', f'echo " " > style.css'])
-        subprocess.run(['cd ..'])
+        os.mkdir("js")
+        os.chdir("..")
         
+        app_py = os.open("app.py",os.O_CREAT | os.O_WRONLY)
+        os.write(app_py,str(dato).encode('utf-8'))
+        os.chdir("templates")
+
+        index = os.open("index.html",os.O_CREAT | os.O_WRONLY)
+        os.write(index,str(html_service).encode('utf-8'))
+        
+        os.chdir("..")
+        os.chdir("static\\css")
+        styles = os.open("styles.css", os.O_CREAT | os.O_WRONLY)
+
+        os.chdir("..")
+        os.chdir("js")
+        script = os.open("script.js", os.O_CREAT | os.O_WRONLY)
+        os.write(script,'')
+        os.chdir("..")
+
+        os.close(app_py) 
+        os.close(index) 
+        os.close(styles) 
+        os.close(script) 
         
     return create()
